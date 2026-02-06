@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login & Signup</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+  <a href="{% url 'home' %}"
+   class="btn btn-outline-success position-fixed"
+   style="top: 16px; right: 16px; z-index: 1050;">
+     Home
+ </a>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-sm w-100" style="max-width: 400px;">
+    <div class="card-body">
+
+      <!-- Tabs -->
+      <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#login" type="button">
+            Login
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#signup" type="button">
+            Sign Up
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+
+        <!-- Login -->
+        <div class="tab-pane fade show active" id="login">
+        {% if login_error %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ login_error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endif %}  
+          <form method="post" action="{% url 'signup_login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="login">
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control" placeholder="Enter Username" name="username" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Enter password" name="password" required>
+            </div>
+
+            <button class="btn btn-primary w-100">Login</button>
+          </form>
+        </div>
+
+        <!-- Signup -->
+        <div class="tab-pane fade" id="signup">
+        {% if signup_error %}
+            <p style="color: red;">{{ signup_error }}</p>
+        {% endif %}
+          <form method="post" action="{% url 'signup_login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="signup">
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control" placeholder="Enter name" name="username" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="Enter email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Create password" name="password" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="confirm password" name="password1" required>
+            </div>
+
+            <button class="btn btn-success w-100">Sign Up</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS (required for tabs) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  let tab = params.get('tab');
+  const djangoTab = "{{ active_tab|default:'' }}";
+
+  if (!tab && djangoTab) {
+    tab = djangoTab;
+  }
+
+  if (tab) {
+    const trigger = document.querySelector(
+      `[data-bs-target="#${tab}"]`
+    );
+    if (trigger) {
+      new bootstrap.Tab(trigger).show();
+    }
+  }
+  document.querySelectorAll('[data-bs-toggle="tab"]').forEach(btn => {
+  btn.addEventListener('shown.bs.tab', e => {
+    history.replaceState(null, '', `?tab=${e.target.dataset.bsTarget.substring(1)}`);
+  });
+});
+</script>
+
+</body>
+</html>
