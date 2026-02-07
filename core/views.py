@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import taskdata
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
+def publichome(request):
+     
+     return render(request,'publichome.html')
 
-
-# @login_required(login_url='signup_login')
+@never_cache
+@login_required(login_url='signup_login')
 def home(request):
     if request.user.is_authenticated:
         td = taskdata.objects.filter(user=request.user)

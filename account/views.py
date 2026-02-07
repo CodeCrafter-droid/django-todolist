@@ -51,6 +51,6 @@ def account(request):
         
     return render(request,'signup_login.html')
 
-def logout_user(request):
-    logout(request)
-    return redirect('signup_login')
+# def logout_user(request):
+#     logout(request)
+#     return redirect('signup_login')
