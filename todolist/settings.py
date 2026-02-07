@@ -142,3 +142,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = 'signup_login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'signup_login'
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 # 1 day 
+SESSION_SAVE_EVERY_REQUEST = True

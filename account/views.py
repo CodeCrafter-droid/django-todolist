@@ -4,6 +4,8 @@ from django.contrib import messages
 from core.models import taskdata
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 # Create your views here.
 def account(request):
@@ -51,6 +53,18 @@ def account(request):
         
     return render(request,'signup_login.html')
 
-# def logout_user(request):
-#     logout(request)
-#     return redirect('signup_login')
+@never_cache
+@login_required
+def deleteacc(request):
+    if request.method == "POST":
+        password = request.POST.get("password")
+        user = request.user
+
+        if not user.check_password(password):
+            messages.error(request, "Incorrect password")
+            return redirect("home")
+
+        logout(request)
+        user.delete()
+        return redirect("publichome")
+    return redirect('home')
