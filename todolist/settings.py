@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -88,7 +88,9 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
-DATABASES['default'] = dj_database_url.parse("postgresql://django_todo_app_ejkt_user:0L2M5V4Qgv5nQWrvM5aI20pNSad1B3EF@dpg-d63ajdi4d50c73dibcm0-a.singapore-postgres.render.com/django_todo_app_ejkt")
+DATABASES_URL = os.environ.get('DATABASES_URL')
+
+DATABASES['default'] = dj_database_url.parse(DATABASES_URL)
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
