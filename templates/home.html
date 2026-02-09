@@ -74,6 +74,12 @@
                     <div class="card-body">
                         {{ task.task }}
                         <span style="position: relative; float: right;">
+                                <span class="badge 
+                                    {% if task.priority == 1 %}bg-danger
+                                    {% elif task.priority == 2 %}bg-warning text-dark
+                                    {% else %}bg-success{% endif %}">
+                                    {{ task.get_priority_display }}
+                                </span>
                             <form action="{% url 'mark_done' task.id %}" style="display:inline;">
                                 <button type="submit" class="btn btn-success btn-sm">
                                         <i class="fa fa-check"></i> Mark as Done
@@ -128,6 +134,14 @@
                 <!-- To Do Form -->
                 <form action="{% url 'addtask' %}" method="post" class="mx-auto px-2" style="max-width: 500px;">
                     {% csrf_token %}
+                        <select name="priority" class="form-select">
+                            {% for value, label in priority_choices %}
+                                <option value="{{ value }}"
+                                    {% if value == 2 %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
                     <div class="row g-2">
                         <div class="col-12 col-md-8">
                             <input type="text" class="form-control" placeholder="Add a task" name="data" required>

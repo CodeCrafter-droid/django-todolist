@@ -13,42 +13,49 @@ def publichome(request):
 @login_required(login_url='signup_login')
 def home(request):
     if request.user.is_authenticated:
-        td = taskdata.objects.filter(user=request.user)
+        td = taskdata.objects.filter(user=request.user).order_by('priority','-updated_at')
     else:
         td = taskdata.objects.none() 
 
-    return render(request,'home.html',{'td':td})
+    return render(request,'home.html',{'td':td,'priority_choices': taskdata.priority_choice,})
 
 
 def addtask(request):
         if request.method == "POST": 
-         data = request.POST["data"]
-        if data:
-            taskdata.objects.create(user=request.user,task=data)
-        else:
-            messages.error(request, "Task cannot be empty")
-            
-        return redirect("home")
+            data = request.POST["data"]
+            priority = request.POST["priority"]
+            if data: 
+                taskdata.objects.create(user=request.user,task=data,priority=priority)
+            else:
+                messages.error(request, "Task cannot be empty")
+                
+            return redirect("home")
+        return render(request,"home.html")
 
 
 def markdone(request, pk):
+    if request.method == "POST":    
         task = get_object_or_404(taskdata, pk=pk)
         task.is_completed = True
         task.save()
         return redirect('home') 
+    return render(request,"home.html")
 
 
 def undotask(request, pk):
+    if request.method == "POST":    
         task = get_object_or_404(taskdata, pk=pk)
         task.is_completed = False
         task.save()
         return redirect('home') 
-     
+    return render(request,"home.html")
 
 def deletetask(request, pk):
+    if request.method == "POST":    
         task = get_object_or_404(taskdata, pk=pk)
         task.delete()
         return redirect('home') 
+    return render(request,"home.html")
 
 
 def edittask(request, pk):
@@ -56,14 +63,23 @@ def edittask(request, pk):
 
     if request.method == "POST":
         data = request.POST.get('task', '').strip()
+        print(data)
+        priority = request.POST.get('priority')
         if data:
             task.task = data
+            if priority:
+                task.priority = priority
             task.save()
             return redirect('home')
+        if priority:
+             task.priority = priority
+             task.save()
+             return redirect('home')
 
     # GET request → open edit page
     return render(request, 'edittask.html', {
-        'td': task
+        'td': task,
+        'priority_choices': taskdata.priority_choice,
     })
 
 

@@ -15,14 +15,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+      <a href="{% url 'home' %}"
+   class="btn btn-outline-success position-fixed"
+   style="top: 16px; right: 16px; z-index: 1050;">
+     ← Back
+ </a>
     <div class="container">
         <h3 class="pt-5 pb-5 text-center">Django TODO App - Edit Task</h3>
         <form action="{% url 'edit_task' td.pk %}" method="POST" style="max-width: 500px; margin: auto;">
             {% csrf_token %}
             <div class="form-group row g-1">
                 <div class="col-12 col-md-8">
-                    <input type="text" name="task" class="form-control" placeholder="{{ td.task }}" value="{{ td.task }}">
+                     <div class="input-group">
+                        <textarea name="task" class="form-control" rows="2" style="resize: none;">{{ td.task }}</textarea>
+                        <span class="input-group-text p-0 px-2">
+                            <span class="badge 
+                                {% if td.priority == 1 %}bg-danger
+                                {% elif td.priority == 2 %}bg-warning text-dark
+                                {% else %}bg-success{% endif %}">
+                                {{ td.get_priority_display }}
+                            </span>
+                        </span>
+                    </div>
                 </div>
+            <div class="col-12 col-md-3">
+                <select name="priority" class="form-select py-md-3 py-1">
+                    {% for value, label in priority_choices %}
+                        <option value="{{ value }}"
+                            {% if value == td.priority %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
                 <div class="col-12 col-md-4">
                     <button type="submit" class="btn btn-primary w-100">
                         <i class="fa fa-plus"></i> Update
