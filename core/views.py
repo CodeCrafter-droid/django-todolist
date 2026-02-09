@@ -33,29 +33,24 @@ def addtask(request):
         return render(request,"home.html")
 
 
-def markdone(request, pk):
-    if request.method == "POST":    
+def markdone(request, pk):    
         task = get_object_or_404(taskdata, pk=pk)
         task.is_completed = True
         task.save()
         return redirect('home') 
-    return render(request,"home.html")
 
 
-def undotask(request, pk):
-    if request.method == "POST":    
+def undotask(request, pk):   
         task = get_object_or_404(taskdata, pk=pk)
         task.is_completed = False
         task.save()
         return redirect('home') 
-    return render(request,"home.html")
 
-def deletetask(request, pk):
-    if request.method == "POST":    
+def deletetask(request, pk):    
         task = get_object_or_404(taskdata, pk=pk)
         task.delete()
         return redirect('home') 
-    return render(request,"home.html")
+    
 
 
 def edittask(request, pk):
