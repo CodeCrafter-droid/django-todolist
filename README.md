@@ -51,7 +51,7 @@ Server: Gunicorn
 
 ## 📂 Project Structure
    
-project/
+''' project/
 ├── app/
 │   ├── models.py
 │   ├── views.py
@@ -74,6 +74,16 @@ Example Endpoints
 - DELETE  /api/tasks/<id>/  Delete task
 
 APIs return JSON and are protected using authentication.
+
+## REST API Endpoints
+
+| Method | Endpoint            | Description              
+|------|---------------------|--------------------------|
+| GET  | /api/tasks/         | List all user tasks      |
+| POST | /api/tasks/         | Create a new task        | 
+| GET  | /api/tasks/<id>/    | Retrieve a single task   |
+| PUT  | /api/tasks/<id>/    | Update a task            |      
+| DELETE | /api/tasks/<id>/  | Delete a task            |    
 
 ## ⚙️ Environment Variables
 The project uses environment variables for security:
