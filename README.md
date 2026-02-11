@@ -89,7 +89,7 @@ These are configured in Render for production.
 
 ## ▶️ Run Locally
 ```
-git clone <repo-url>
+git clone https://github.com/CodeCrafter-droid/django-todolist.git
 cd project
 pip install -r requirements.txt
 python manage.py migrate
