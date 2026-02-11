@@ -88,12 +88,13 @@ The project uses environment variables for security:
 These are configured in Render for production.
 
 ## ▶️ Run Locally
-
+```
 git clone <repo-url>
 cd project
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
 
 ## 📌 Resume Highlight
 "Built and deployed a Django-based Todo application with user authentication, priority-based task management, and REST API support, using PostgreSQL and cloud deployment on Render."
