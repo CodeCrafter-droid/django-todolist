@@ -2,7 +2,8 @@
 A full-stack Todo List web application built using Django that allows users to manage their daily tasks efficiently with authentication, priority-based task management, and deployment-ready configuration.
 The project is deployed on Render and supports both web UI and REST APIs for future integrations.
  
-## Live Demo: https://django-todolist-u5ks.onrender.com/�
+## Live Demo: 
+- https://django-todolist-u5ks.onrender.com
 
 ## 🚀 Features
 👤 User Management
@@ -51,7 +52,7 @@ Server: Gunicorn
 
 ## 📂 Project Structure
    
-''' project/
+```project/
 ├── app/
 │   ├── models.py
 │   ├── views.py
@@ -64,18 +65,8 @@ Server: Gunicorn
 ├── static/
 ├── requirements.txt
 └── manage.py
-
-## 🔌 REST API Overview
-Example Endpoints
-- Method  Endpoint          Description 
-- GET     /api/tasks/       List user tasks
-- POST    /api/tasks/       Create new task
-- PUT     /api/tasks/<id>/  Update task
-- DELETE  /api/tasks/<id>/  Delete task
-
-APIs return JSON and are protected using authentication.
-
-## REST API Endpoints
+```
+## 🔌 REST API Overvie
 
 | Method | Endpoint            | Description              
 |------|---------------------|--------------------------|
@@ -83,14 +74,16 @@ APIs return JSON and are protected using authentication.
 | POST | /api/tasks/         | Create a new task        | 
 | GET  | /api/tasks/<id>/    | Retrieve a single task   |
 | PUT  | /api/tasks/<id>/    | Update a task            |      
-| DELETE | /api/tasks/<id>/  | Delete a task            |    
+| DELETE | /api/tasks/<id>/  | Delete a task            |   
+
+APIs return JSON and are protected using authentication.
 
 ## ⚙️ Environment Variables
 The project uses environment variables for security:
 
-SECRET_KEY=
-DEBUG=
-DATABASE_URL=
+- SECRET_KEY=
+- DEBUG=
+- DATABASE_URL=
 
 These are configured in Render for production.
 
