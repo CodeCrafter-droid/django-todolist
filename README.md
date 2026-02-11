@@ -96,3 +96,4 @@ python manage.py runserver
 👨‍💻 Author
 CodeCrafter_droid
 Backend Developer (Python / Django)
+
