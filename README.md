@@ -67,11 +67,11 @@ project/
 
 ## 🔌 REST API Overview
 Example Endpoints
-Method  Endpoint          Description 
-GET     /api/tasks/       List user tasks
-POST    /api/tasks/       Create new task
-PUT     /api/tasks/<id>/  Update task
-DELETE  /api/tasks/<id>/  Delete task
+- Method  Endpoint          Description 
+- GET     /api/tasks/       List user tasks
+- POST    /api/tasks/       Create new task
+- PUT     /api/tasks/<id>/  Update task
+- DELETE  /api/tasks/<id>/  Delete task
 
 APIs return JSON and are protected using authentication.
 
