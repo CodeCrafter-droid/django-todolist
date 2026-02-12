@@ -10,10 +10,10 @@
     <!-- Bootstrap -->
      <link rel="icon" type="image/x-icon" href="{% static 'favicon-bl-dk.ico' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .form-control{
         padding: 1.375rem .75rem !important;
@@ -32,35 +32,43 @@
     {% endfor %}
 </div>
 {% endif %} -->
-<nav class="navbar navbar-light bg-light px-3">
-  <div class="container-fluid">
-
-    <!-- Left -->
-    <div class="col-4 text-start">
-      <a class="navbar-brand fw-bold" href="#">TODO</a>
-    </div>
-
-    <!-- Center -->
-    <div class="col-4 text-center">
-      <span class="h3 mb-0">Django ToDo App</span>
-    </div>
-<div class="col-4 text-end">
-        <span class="d-block d-md-inline me-md-2 mb-1 mb-md-0 fw-semibold">
-            Hello, {{ request.user.username }}
-        </span>
-    <form method="post" action="{% url 'logout' %}" class="d-block d-md-inline me-1 mb-1 mb-md-0">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">
-            Log out
-        </button>
-    </form>
-        <form method="post" action="{% url 'deleteacc' %}" class="d-block d-md-inline">
-        {% csrf_token %}
-            <button  type="button"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-              Delete Account
+    <nav class="navbar navbar-light bg-light px-3">
+    <div class="container-fluid">
+        <!-- Left -->
+        <div class="col-4 text-start">
+        <a class="navbar-brand fw-bold" href="#">TODO</a>
+        {% if user.is_superuser %}
+            <span class="d-block d-md-inline me-md-2 mb-1 mb-md-0 fw-semibold">
+            <form action="{% url 'admin:index' %}" method="get" style="display:inline;">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="bi bi-person-fill-gear"></i>
             </button>
         </form>
-</div>
+        </span>
+        {% endif %}
+        </div>
+
+        <!-- Center -->
+        <div class="col-4 text-center">
+        <span class="h3 mb-0">Django ToDo App</span>
+        </div>
+    <div class="col-4 text-end">
+            <span class="d-block d-md-inline me-md-2 mb-1 mb-md-0 fw-semibold">
+                Hello, {{ request.user.username }}
+            </span>
+        <form method="post" action="{% url 'logout' %}" class="d-block d-md-inline me-1 mb-1 mb-md-0">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                Log out
+            </button>
+        </form>
+            <form method="post" action="{% url 'deleteacc' %}" class="d-block d-md-inline">
+            {% csrf_token %}
+                <button  type="button"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                Delete Account
+                </button>
+            </form>
+    </div>
 </nav>    
 <div class="container">
         <div class="row">
