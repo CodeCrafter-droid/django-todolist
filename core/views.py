@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from .models import taskdata
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 def publichome(request):
      
@@ -76,6 +78,16 @@ def edittask(request, pk):
         'td': task,
         'priority_choices': taskdata.priority_choice,
     })
+
+#api test
+@api_view(["GET"])
+def demo_api(request):
+     return Response({
+          "message":"Naya World",
+          "status":"success"
+     })
+     
+     
 
 
 
