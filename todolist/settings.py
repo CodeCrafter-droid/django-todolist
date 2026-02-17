@@ -163,8 +163,8 @@ REST_FRAMEWORK = {
 
 ),
 'DEFAULT_PERMISSION_CLASSES':(
-    'rest_framework.permission.IsAuthenticatedOrReadOnly'
-)
+    'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+),
 }
 
 SIMPLE_JWT = {
