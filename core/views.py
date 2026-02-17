@@ -19,7 +19,7 @@ def home(request):
     else:
         td = taskdata.objects.none() 
 
-    return render(request,'home.html',{'td':td,'priority_choices': taskdata.priority_choice,})
+    return render(request,'home.html',{'':td,'priority_choices': taskdata.priority_choice,})
 
 
 def addtask(request):
@@ -79,13 +79,13 @@ def edittask(request, pk):
         'priority_choices': taskdata.priority_choice,
     })
 
-#api test
-@api_view(["GET"])
-def demo_api(request):
-     return Response({
-          "message":"Naya World",
-          "status":"success"
-     })
+# #api test
+# @api_view(["GET"])
+# def demo_api(request):
+#      return Response({
+#           "message":"Naya World",
+#           "status":"success"
+#      })
      
      
 

@@ -9,8 +9,7 @@ urlpatterns = [
     path("delete_task/<int:pk>",views.deletetask,name="delete_task"),
     path("edit_task/<int:pk>",views.edittask,name="edit_task"),
     path("undo_task/<int:pk>",views.undotask,name="undo_task"),
-    path("api/demo/",views.demo_api,name="demo_api"),
-    
+    # path("api/demo/",views.demo_api,name="demo_api"),
 ]
 
 

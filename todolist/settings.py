@@ -14,6 +14,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 import dj_database_url
+from datetime import timedelta
+
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     'core',
     'account',
     'rest_framework',
+    'api',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +150,21 @@ LOGOUT_REDIRECT_URL = 'signup_login'
 
 SESSION_COOKIE_AGE = 60 * 60 # 1 day 
 SESSION_SAVE_EVERY_REQUEST = True
+
+
+REST_FRAMEWORK = {
+'DEFAULT_SCHEMA_CLASS':
+'drf_spectacular.openapi.AutoSchema',
+
+'DEFAULT_AUTHENTICATION_CLASSES':
+(
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+}
