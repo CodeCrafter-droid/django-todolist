@@ -2,11 +2,10 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from core.models import taskdata
 from core.serializers import TaskSerializers
-from rest_framework.permissions import IsAdminUser
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Create your views here.
 class TaskAPIs(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = taskdata.objects.all()
     serializer_class = TaskSerializers
 
