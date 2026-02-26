@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from .models import taskdata
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+
 
 def publichome(request):
      
